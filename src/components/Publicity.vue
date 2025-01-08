@@ -30,20 +30,25 @@ export default {
     result() {
       return this.$store.state.result;
     },
+    list() {
+      return this.$store.state.list;
+    },
     message() {
-      const { result, config } = this;
+      const { result, config, list } = this;
       const fields = Object.keys(config);
 
       let message = [{ key: 0, title: config.name }];
       fields.forEach((item, index) => {
         let label = conversionCategoryName(item);
         if (result[item] && config[item] > 0) {
+          const names = result[item].map(key => {
+            const person = list.find(d => d.key === key);
+            return person ? person.name : key;
+          });
           message.push({
             key: index + 1,
             title: `${label}抽奖结果:`,
-            value: `${
-              result[item].length > 0 ? result[item].join('、') : '暂未抽取'
-            }`
+            value: `${names.length > 0 ? names.join('、') : '暂未抽取'}`
           });
         }
       });
@@ -68,7 +73,7 @@ export default {
   .item {
     text-align: center;
     color: #fff;
-    font-size: 16px;
+    font-size: 14px;
     .title {
       color: #ccc;
     }

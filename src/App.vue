@@ -453,8 +453,8 @@ export default {
   }
   .itemres {
     background: #fff;
-    width: 160px;
-    height: 160px;
+    width: 340px; // Increased width
+    height: 100px;
     border-radius: 4px;
     border: 1px solid #ccc;
     line-height: 160px;
